@@ -12,12 +12,17 @@ import styles from './styles';
 export const HeroSection = (props) => {
   return (
     <View style={styles.container}>
-      <TouchableNativeFeedback onPress={() => Linking.openURL(`https://www.youtube.com/watch?v=${props.yt_trailer_code}`)} >
+      <TouchableNativeFeedback
+        onPress={() => Linking.openURL(`https://www.youtube.com/watch?v=${props.yt_trailer_code}`)} >
         <Image
           style={styles.heroImage}
           source={{uri: props.background_image}}>
           <View style={styles.playIcon}>
-            <Icon name="play-circle" size={50} color="white" />
+            <Icon
+              name="play-circle"
+              size={50}
+              color="white"
+              onPress={() => Linking.openURL(`https://www.youtube.com/watch?v=${props.yt_trailer_code}`)} />
           </View>
           <Text style={styles.heroText}>Watch Movie Trailor</Text>
         </Image>

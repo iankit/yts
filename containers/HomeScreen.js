@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { 
   StyleSheet,
   Text,
@@ -7,7 +7,8 @@ import {
   ScrollView,
   FlatList,
   BackHandler,
-  ActivityIndicator } from 'react-native';
+  ActivityIndicator,
+  Keyboard, } from 'react-native';
 import axios from 'axios';
 
 import { Container } from '../components/Container';
@@ -16,7 +17,7 @@ import { Loading } from '../components/Loading';
 import { Tile } from '../components/Tile';
 
 
-export default class HomeScreen extends Component {
+export default class HomeScreen extends PureComponent {
 
   static navigationOptions = {
     header: null
@@ -31,7 +32,6 @@ export default class HomeScreen extends Component {
       currentSearchPageNumber: 1,
       searching: false,
       searchTerm: '',
-      showSearchClose: false,
       animating: true,
       showSearchInput: false,
     };
@@ -52,6 +52,7 @@ export default class HomeScreen extends Component {
       console.log(err,'Can load the data from the server');
     }
   }
+
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', () => {
       if (this.props.navigation.state.routeName == "Welcome") {
@@ -61,11 +62,13 @@ export default class HomeScreen extends Component {
   )}
 
   onTilePress = (details) => {
+    this.setState({ showSearchInput: (this.state.searchTerm ? true : false) }) 
     this.props.navigation.navigate('Details', details);
+    Keyboard.dismiss();
   }
 
   changeSearchLayout(opt = true) {
-    this.setState({ showSearchInput: opt, searchTerm: '' });
+    this.setState({ showSearchInput: opt });
   }
 
   renderTiles = (allMovies) => {
@@ -88,7 +91,7 @@ export default class HomeScreen extends Component {
   }
 
   onSearchPress = (text) => {
-    this.setState({ searchTerm: text, searching: true, showSearchClose: true, animating: true });
+    this.setState({ searchTerm: text, searching: true, animating: true });
     this.fetchSearchResult(text);
   }
 
@@ -129,8 +132,10 @@ export default class HomeScreen extends Component {
         this.state[value].length > 0 ?
           <View style={{flexDirection: 'row', flexWrap: 'wrap', flex: 1, padding: 5, justifyContent: 'space-between'}}>
             <FlatList
-              data={this.state[value]} 
+              data={this.state[value]}
+              keyExtractor={(item, index) => item.id}
               numColumns="3"
+              keyboardShouldPersistTaps="handled"
               onEndReached={funcOnEndReached}
               onEndReachedThreshold={threshHold}
               renderItem={({item}) => <Tile key={item.id} movie={item} onTilePress={this.onTilePress}/>}

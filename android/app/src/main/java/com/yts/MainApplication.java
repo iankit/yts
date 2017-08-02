@@ -1,4 +1,4 @@
-package com.yts;
+package com.nnkit.yts;
 
 import android.app.Application;
 

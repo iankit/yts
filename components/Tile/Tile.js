@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, TouchableHighlight, View, Image } from 'react-native';
+import { Text, TouchableOpacity, View, Image } from 'react-native';
 import styles from './styles';
 
 const Tile = (props) => {
   const movie = props.movie;
   return (
-    <TouchableHighlight
+    <TouchableOpacity
+      activeOpacity={0.7}
       style={styles.tile}
       onPress={() => props.onTilePress(movie)}>
       <View>
@@ -15,7 +16,7 @@ const Tile = (props) => {
         />
         <Text style={styles.tileText}>{(movie.title_english.length > 50 ? (movie.title_english.slice(0,45)+'. . .') : movie.title_english) + ' (' + movie.year +' )'}</Text>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 

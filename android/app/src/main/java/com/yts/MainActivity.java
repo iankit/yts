@@ -1,4 +1,4 @@
-package com.yts;
+package com.nnkit.yts;
 
 import com.facebook.react.ReactActivity;
 import com.oblador.vectoricons.VectorIconsPackage;

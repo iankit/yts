@@ -29,10 +29,10 @@ export const MovieInfo = (props) => {
             </View>
             <View style={[styles.row, styles.padUpDown]}>
               <Text style={styles.label}>Runtime: </Text>
-              <Text style={styles.value}>{props.runtime}</Text>          
+              <Text style={styles.value}>{`${props.runtime} minutes`}</Text>          
             </View>
             <View style={[styles.row, styles.padUpDown]}>
-              <Text style={styles.label}>Rating: </Text>
+              <Text style={styles.label}>IMBD Rating: </Text>
               <Text style={styles.value}>{`${props.rating}/10`}</Text>          
             </View>
             <View style={[styles.row, styles.padUpDown]}>

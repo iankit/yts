@@ -16,9 +16,9 @@ const SearchBar = (props) => {
         placeholderTextColor='white'
         returnKeyType='done'
         clearButtonMode='always'
-        underlineColorAndroid={'rgba(0,0,0,0)'}
+        underlineColorAndroid='white'
         selectionColor='white'
-        onBlur={() => props.changeSearchLayout(false)}
+        onBlur={() => props.changeSearchLayout() }
       />
     </View>
   );
